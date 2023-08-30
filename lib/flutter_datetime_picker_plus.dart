@@ -347,7 +347,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
         padding: EdgeInsets.all(8.0),
         height: theme.containerHeight,
-        decoration: BoxDecoration(color: theme.backgroundColor),
+        color: Colors.black,
+        // decoration: BoxDecoration(color: theme.backgroundColor),
         child: NotificationListener(
           onNotification: (ScrollNotification notification) {
             if (notification.depth == 0 && notification is ScrollEndNotification && notification.metrics is FixedExtentMetrics) {
@@ -359,7 +360,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           },
           child: CupertinoPicker.builder(
             key: key,
-            backgroundColor: theme.backgroundColor,
+            backgroundColor: Colors.black,
             scrollController: scrollController as FixedExtentScrollController,
             itemExtent: theme.itemHeight,
             onSelectedItemChanged: (int index) {
@@ -389,9 +390,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   Widget _renderItemView(picker_theme.DatePickerTheme theme) {
     return Container(
-      color: theme.backgroundColor,
+      color: Colors.pink,
       child: Directionality(
-        textDirection: TextDirection.ltr,
+        textDirection: TextDirection.rtl,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -455,13 +456,14 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Container(
       height: theme.titleHeight,
       decoration: BoxDecoration(
-        color: theme.headerColor ?? theme.backgroundColor,
+        color: Colors.black,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
             height: theme.titleHeight,
+            padding: EdgeInsets.only(top: 3, bottom: 3, right: 15, left: 15),
             child: CupertinoButton(
               pressedOpacity: 0.3,
               padding: EdgeInsetsDirectional.only(start: 16, top: 0),
@@ -483,7 +485,10 @@ class _DatePickerState extends State<_DatePickerComponent> {
             ),
           ),
           Container(
-            height: theme.titleHeight,
+           // height: theme.titleHeight,
+            padding: EdgeInsetsDirectional.only(end: 0, top: 0),
+            height: 24,
+            width: 75,
             child: CupertinoButton(
               pressedOpacity: 0.3,
               padding: EdgeInsetsDirectional.only(end: 16, top: 0),
@@ -492,7 +497,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'NimbusBold', color: const Color(0Xfff0f2f2)),
               ),
               onPressed: () {
-                Navigator.pop(context, widget.pickerModel.finalTime());
+                //Navigator.pop(context, widget.pickerModel.finalTime());
                 if (widget.route.onConfirm != null) {
                   int value = widget.pickerModel.middleStringAtIndex(widget.pickerModel.currentMiddleIndex()) != "Optional"
                       ? widget.pickerModel.currentMiddleIndex() + 1
@@ -503,7 +508,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                   temp = new DateTime(int.parse("${widget.pickerModel.leftStringAtIndex(widget.pickerModel.currentLeftIndex())}"), monthOptionalStatus ? 1 : value, dayOptionalStatus ? 1 : time!.day,
                       time!.hour, time.minute, time.second, time.millisecond, time.microsecond);
 
-                  Navigator.pop(context, temp);
+                 Navigator.pop(context, temp);
                   widget.route.onConfirm!(temp!, dayOptionalStatus, monthOptionalStatus);
                 }
               },
