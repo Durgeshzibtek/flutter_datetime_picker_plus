@@ -301,7 +301,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               ),
               child: GestureDetector(
                 child: Material(
-                  color: theme.backgroundColor,
+                  color: Colors.black,
                   child: _renderPickerView(theme),
                 ),
               ),
@@ -347,8 +347,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
         padding: EdgeInsets.all(8.0),
         height: theme.containerHeight,
-        color: Colors.black,
-        // decoration: BoxDecoration(color: theme.backgroundColor),
+        decoration: BoxDecoration(color: theme.backgroundColor),
         child: NotificationListener(
           onNotification: (ScrollNotification notification) {
             if (notification.depth == 0 && notification is ScrollEndNotification && notification.metrics is FixedExtentMetrics) {
@@ -360,7 +359,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           },
           child: CupertinoPicker.builder(
             key: key,
-            backgroundColor: Colors.black,
+            backgroundColor: theme.backgroundColor,
             scrollController: scrollController as FixedExtentScrollController,
             itemExtent: theme.itemHeight,
             onSelectedItemChanged: (int index) {
@@ -390,7 +389,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   Widget _renderItemView(picker_theme.DatePickerTheme theme) {
     return Container(
-      color: Colors.pink,
+      color: theme.backgroundColor,
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Row(
@@ -456,6 +455,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Container(
       height: theme.titleHeight,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(topRight: Radius.circular(0), topLeft: Radius.circular(0)),
         color: Colors.black,
       ),
       child: Row(
